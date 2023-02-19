@@ -1,3 +1,5 @@
+import { useAnswerStore } from "store/answerstore";
+
 export default function QuestionBox() {
   return (
     <div className="flex items-start space-x-4">
@@ -14,6 +16,7 @@ export default function QuestionBox() {
               className="block w-full resize-none border-0 border-b border-transparent bg-gray-700 p-0 pb-2 focus:border-indigo-600 text-white focus:ring-0 sm:text-sm"
               placeholder="What Is Your Question..."
               defaultValue={""}
+              required
             />
           </div>
           <div className="flex justify-end pt-3">
