@@ -8,6 +8,15 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import loading from "public/loading.gif";
 import { useAnswerStore } from "store/answerstore";
+import { useSourceStore } from "store/sourcestore";
+
+function truncateString(str: string, maxLength: number): string {
+  if (str.length <= maxLength) {
+    return str;
+  }
+  const truncatedString = str.substring(0, maxLength - 3);
+  return truncatedString + "...";
+}
 
 export default function Home() {
   const router = useRouter();
@@ -17,6 +26,7 @@ export default function Home() {
 
   const { isOpen, openModal, closeModal } = useModalStore();
   const { answer, fetchData } = useAnswerStore();
+  const { currentSource, pageNumber, setSource } = useSourceStore();
 
   useEffect(() => {
     if (question) {
@@ -68,21 +78,26 @@ export default function Home() {
           className="divide-y mx-6 bg-emerald-400 overflow-hidden "
           onClick={openModal}
         >
+          <ul role="list" className="divide-y-8 text-white divide-emerald-500">
+            {answer?.source.map((item, index) => (
+              <li
+                key={item}
+                className="p-4"
+                onClick={() => setSource(item, answer.page[index])}
+              >
+                {truncateString(item, 300)}
+                {answer.page[index]}
+              </li>
+            ))}
+          </ul>
+
           <Modal
+            content={currentSource}
+            pageNumber={pageNumber}
             isOpen={isOpen}
             openModal={openModal}
             closeModal={closeModal}
           ></Modal>
-          <div className=" px-4 text-white py-5 sm:px-6">
-            Defence Force Discipline Act 1982
-          </div>
-          <div className="px-4 text-white py-5 sm:p-6">
-            {" "}
-            For years parents have espoused the health benefits of eating garlic
-            bread with cheese to their children, with the food earning such an
-            iconic status in our culture that kids will often dress up as warm,
-            cheesy loaf for Halloween.
-          </div>
         </div>
       </div>
       <div className="relative bg-gray-900 h-full w-full ">

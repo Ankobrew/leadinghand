@@ -31,7 +31,7 @@ export default function Chat({ agent, content }: Props) {
       </div>
       <div>
         <h4 className="text-lg font-bold text-white">{agent}</h4>
-        <p className="mt-1 text-lg text-white">{content}</p>
+        <p className="mt-1 text-lg  text-white">{content}</p>
       </div>
     </div>
   );

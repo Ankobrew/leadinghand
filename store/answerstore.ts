@@ -3,6 +3,7 @@ import { create } from "zustand";
 type Answer = {
   answers: string;
   source: string[];
+  page: string[];
 };
 
 type AnswerState = {

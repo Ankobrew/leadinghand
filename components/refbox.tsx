@@ -1,18 +1,24 @@
-import { Fragment, useState, ReactNode } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { CheckIcon } from "@heroicons/react/24/outline";
-import { useModalStore } from "store/modalstore";
 
 type Props = {
   isOpen: boolean;
+  content: String;
+  pageNumber: String;
   openModal: () => void;
   closeModal: () => void;
 };
 
-export default function Modal({ isOpen, openModal, closeModal }: Props) {
+export default function Modal({
+  isOpen,
+  openModal,
+  closeModal,
+  content,
+  pageNumber,
+}: Props) {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={closeModal}>
+      <Dialog as="div" className="relative z-10" onClose={() => closeModal()}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -43,13 +49,10 @@ export default function Modal({ isOpen, openModal, closeModal }: Props) {
                       as="h3"
                       className="text-lg font-medium leading-6 text-gray-900"
                     >
-                      Payment successful
+                      Reference Page: {pageNumber}
                     </Dialog.Title>
                     <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Consequatur amet labore.
-                      </p>
+                      <p className="text-sm text-gray-500">{content}</p>
                     </div>
                   </div>
                 </div>
