@@ -49,7 +49,7 @@ export default function Modal({
                       as="h3"
                       className="text-lg font-medium leading-6 text-gray-900"
                     >
-                      Reference Page: {pageNumber}
+                      DFDA 1982: Page {pageNumber}
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">{content}</p>
